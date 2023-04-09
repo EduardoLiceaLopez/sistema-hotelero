@@ -4,6 +4,8 @@ import { UpdateUsuarioInput } from './dto/update-usuario.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Usuario } from './entities/usuario.entity';
 import { Repository } from 'typeorm';
+import { TipoUsuario } from 'src/tipo_usuarios/entities/tipo_usuario.entity';
+import { TipoUsuariosService } from 'src/tipo_usuarios/tipo_usuarios.service';
 
 @Injectable()
 export class UsuariosService {
@@ -12,6 +14,8 @@ export class UsuariosService {
     
     @InjectRepository(Usuario)
     private usuarioRepositorio: Repository<Usuario>,
+
+    private tipoUsuarioServicio: TipoUsuariosService,
   ){};
 
   //CREATE
@@ -40,6 +44,12 @@ export class UsuariosService {
       throw new NotFoundException(`Usuario con el ID ${id} no fue econtrado o no existe`);
     }
   }
+
+  //Invoca el servicio del repositorio de tipo de usuario para conseguir sus datos
+  getTipoUsuario(tipoUsr_id: number): Promise<TipoUsuario>{
+    return this.tipoUsuarioServicio.findOne(tipoUsr_id)
+  };
+
   //Fin READ
 
 

@@ -6,6 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TipoUsuariosModule } from './tipo_usuarios/tipo_usuarios.module';
 
 
 
@@ -25,7 +26,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     autoLoadEntities: true,
     synchronize: true,
   }),
-  UsuariosModule],
+  UsuariosModule,
+  TipoUsuariosModule],
   controllers: [AppController],
   providers: [AppService],
 })

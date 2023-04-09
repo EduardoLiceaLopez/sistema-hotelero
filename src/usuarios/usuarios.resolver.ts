@@ -1,8 +1,9 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent } from '@nestjs/graphql';
 import { UsuariosService } from './usuarios.service';
 import { Usuario } from './entities/usuario.entity';
 import { CreateUsuarioInput } from './dto/create-usuario.input';
 import { UpdateUsuarioInput } from './dto/update-usuario.input';
+import { TipoUsuario } from 'src/tipo_usuarios/entities/tipo_usuario.entity';
 
 @Resolver(() => Usuario)
 export class UsuariosResolver {
@@ -35,7 +36,27 @@ export class UsuariosResolver {
     return this.usuariosServicio.findOne(id);
   }
 
-  //Fin de 
+  @ResolveField((returns)=> TipoUsuario)
+  async tipoUsuario(@Parent() usuario: Usuario): Promise<TipoUsuario>{
+    const tipoUsuario = await this.usuariosServicio.getTipoUsuario(usuario.tipoUsr_id);
+
+    //Esta comprobacion se hace para que en caso de que no haya un tipo de usuario
+    //Se devuelva una alternativa de respuesta y no solo null
+    if (tipoUsuario){
+
+      return tipoUsuario;
+
+    } else {
+      return{
+        id: parseInt('0', 10),
+        nombre: 'No hay un tipo de usuario asociado a este usuario',
+        usuarios: [],
+      }
+    } 
+
+
+  }
+  //Fin de READ
 
   //UPDATE en CRUD
   //Args es un decorador que indica a GraphQl que argumentos espera
