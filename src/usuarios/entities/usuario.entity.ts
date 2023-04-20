@@ -38,6 +38,7 @@ export class Usuario {
    @Field()
    tipoUsr_id: number;
 
+   
    //Aqui es donde se hará el enlace con la otra entidad (tabla)
    //En este caso la tabla tipo_usuario
    @ManyToOne(()=> TipoUsuario, (tipoUsuario) => tipoUsuario.usuarios)
