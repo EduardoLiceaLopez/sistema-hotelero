@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateTipoUsuarioInput {
+  nombre: String!
+}
+
 input CreateUsuarioInput {
   apMaterno: String
   apPaterno: String!
@@ -12,14 +16,30 @@ input CreateUsuarioInput {
 }
 
 type Mutation {
+  actualizarTipoUsuario(updateTipoUsuarioInput: UpdateTipoUsuarioInput!): TipoUsuario!
   actualizarUsuario(updateUsuarioInput: UpdateUsuarioInput!): Usuario!
+  borrarTipoUsuario(id: Float!): String!
   borrarUsuario(id: Float!): String!
+  crearTipoUsuario(tipoUsuarioInput: CreateTipoUsuarioInput!): TipoUsuario!
   crearUsuario(usuarioInput: CreateUsuarioInput!): Usuario!
 }
 
 type Query {
+  tipoUsuario(id: Float!): TipoUsuario!
+  tipoUsuarios: [TipoUsuario!]!
   usuario(id: Float!): Usuario!
   usuarios: [Usuario!]!
+}
+
+type TipoUsuario {
+  id: Int!
+  nombre: String!
+  usuarios: [Usuario!]
+}
+
+input UpdateTipoUsuarioInput {
+  id: Int!
+  nombre: String
 }
 
 input UpdateUsuarioInput {
@@ -39,5 +59,7 @@ type Usuario {
   id: Float!
   nombre: String!
   numTelefono: String!
+  tipoUsr: TipoUsuario @deprecated(reason: "Este campo ha cambiado su valor")
   tipoUsr_id: Float!
+  tipoUsuario: TipoUsuario!
 }

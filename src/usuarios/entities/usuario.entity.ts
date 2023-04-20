@@ -1,10 +1,10 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { TipoUsuario } from 'src/tipo_usuarios/entities/tipo_usuario.entity';
-import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 
 
-@Entity('usuario')//Aqui se coloca el nombre que tendrá la tabla en la bd
+@Entity('usuarios')//Aqui se coloca el nombre que tendrá la tabla en la bd
 @ObjectType()
 export class Usuario {
 
@@ -41,6 +41,7 @@ export class Usuario {
    //Aqui es donde se hará el enlace con la otra entidad (tabla)
    //En este caso la tabla tipo_usuario
    @ManyToOne(()=> TipoUsuario, (tipoUsuario) => tipoUsuario.usuarios)
+   @JoinColumn({name: 'tipoUsr_id'})
    @Field({nullable:true, deprecationReason: 'Este campo ha cambiado su valor' })
    tipoUsr?: TipoUsuario;
    

@@ -24,7 +24,7 @@ import { TipoUsuariosModule } from './tipo_usuarios/tipo_usuarios.module';
     username: 'root',
     password: 'liceedu12',
     autoLoadEntities: true,
-    synchronize: true,
+    synchronize: false,
   }),
   UsuariosModule,
   TipoUsuariosModule],
