@@ -7,6 +7,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TipoUsuariosModule } from './tipo_usuarios/tipo_usuarios.module';
+import { TiposUsuarioModule } from './tipos_usuario/tipos_usuario.module';
+import { ClienteModule } from './cliente/cliente.module';
 
 
 
@@ -27,7 +29,9 @@ import { TipoUsuariosModule } from './tipo_usuarios/tipo_usuarios.module';
     synchronize: false,
   }),
   UsuariosModule,
-  TipoUsuariosModule],
+  TipoUsuariosModule,
+  TiposUsuarioModule,
+  ClienteModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -23,5 +23,5 @@ export class CreateUsuarioInput {
 
   @IsNotEmpty()
   @Field((type)=> Int)
-  tipoUsr_id: number;
+  id_tipo_usuario: number;
 }

@@ -36,14 +36,14 @@ export class Usuario {
  
    @Column()
    @Field()
-   tipoUsr_id: number;
+   id_tipo_usuario: number;
 
    //Aqui es donde se hará el enlace con la otra entidad (tabla)
    //En este caso la tabla tipo_usuario
    @ManyToOne(()=> TipoUsuario, (tipoUsuario) => tipoUsuario.usuarios)
    @JoinColumn({name: 'tipoUsr_id'})
    @Field({nullable:true, deprecationReason: 'Este campo ha cambiado su valor' })
-   tipoUsr?: TipoUsuario;
+   tipo_usuario?: TipoUsuario;
    
 
    
